@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 public class CriaTabelaEditora {
 	public static void main(String[] args) throws Exception {
 		String stringDeConexao = "jdbc:mysql://localhost:3306/revistaria";
-		String usuario = "fabio";
+		String usuario = "root";
 		String senha = "123456";
 
 		System.out.println("Abrindo conexao...");
