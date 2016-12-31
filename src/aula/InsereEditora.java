@@ -1,7 +1,6 @@
 package aula;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Scanner;
@@ -10,12 +9,10 @@ import com.mysql.jdbc.Statement;
 
 public class InsereEditora {
 	public static void main(String[] args) throws Exception {
-		String stringDeConexao = "jdbc:mysql://localhost:3306/revistaria";
-		String usuario = "root";
-		String senha = "123456";
 
+		// Abre conexao
 		System.out.println("Abrindo conexao...");
-		Connection conexao = DriverManager.getConnection(stringDeConexao, usuario, senha);
+		Connection conexao = ConnectionFactory.createConnection();
 
 		Scanner entrada = new Scanner(System.in);
 		Editora e = new Editora();
@@ -28,9 +25,14 @@ public class InsereEditora {
 
 		entrada.close();
 
-		String sql = "INSERT INTO Editora (nome, email) " + " VALUES ('" + e.getNome() + "', '" + e.getEmail() + "')";
+		// String sql = "INSERT INTO Editora (nome, email) " + " VALUES ('" +
+		// e.getNome() + "', '" + e.getEmail() + "')";
+		String sql = "INSERT INTO Editora (nome, email) VALUES (?, ?)";
 
 		PreparedStatement comando = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+		comando.setString(1, e.getNome());
+		comando.setString(2, e.getEmail());
 
 		System.out.println("Executando comando...");
 		comando.execute();

@@ -1,6 +1,7 @@
 package aula;
 
 public class Editora {
+	// Cria campos da tabela
 	private Long id;
 	private String nome;
 	private String email;

@@ -1,19 +1,14 @@
 package aula;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 public class CriaBaseDeDadosRevistaria {
 	public static void main(String[] args) throws Exception {
 
-		String stringDeConexao = "jdbc:mysql://localhost:3306/revistaria";
-		String usuario = "root";
-		String senha = "123456";
-
-		// Cria e Abre conexao
+		// Abre conexao
 		System.out.println("Abrindo conexao...");
-		Connection conexao = DriverManager.getConnection(stringDeConexao, usuario, senha);
+		Connection conexao = ConnectionFactory.createConnection();
 
 		System.out.println("Apagando a base de dados revistaria...");
 		String sql = "DROP DATABASE IF EXISTS revistaria";
