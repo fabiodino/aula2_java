@@ -2,27 +2,37 @@ package aula;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.Scanner;
 
-public class CriaTabelaEditora {
+public class RemoveEditora {
 	public static void main(String[] args) throws Exception {
 
 		// Abre conexao
 		System.out.println("Abrindo conexao...");
 		Connection conexao = ConnectionFactory.createConnection();
 
+		// Instancia entrada
+		Scanner entrada = new Scanner(System.in);
+
+		// Cria user input
+		System.out.println("Digite o id da editora que deseja remover: ");
+		Long id = Long.parseLong(entrada.nextLine());
+
+		// Fecha entrada
+		entrada.close();
+
 		// Cria string sql
-		System.out.println("Criando a tabela Editora...");
-		String sql = "CREATE TABLE Editora (" + "id BIGINT NOT NULL AUTO_INCREMENT," + "nome VARCHAR (255) NOT NULL,"
-				+ "email VARCHAR (255) NOT NULL," + "PRIMARY KEY (id)" + ")" + "ENGINE = InnoDB";
+		String sql = "DELETE FROM Editora WHERE id = ?";
 
 		// Cria comando
 		PreparedStatement comando = conexao.prepareStatement(sql);
 
-		// Executa comando
-		comando.execute();
+		// Recebe parametro
+		comando.setLong(1, id);
 
-		// Fecha comando
-		comando.close();
+		// Executa comando
+		System.out.println("Executando comando...");
+		comando.execute();
 
 		// Fecha conexao
 		System.out.println("Fechando conexao...");

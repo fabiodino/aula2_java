@@ -1,11 +1,12 @@
 package aula;
 
 public class Editora {
-	// Cria campos da tabela
+	// Cria campos da tabela Editora
 	private Long id;
 	private String nome;
 	private String email;
 
+	// Cria getters e setters
 	/**
 	 * @return the id
 	 */

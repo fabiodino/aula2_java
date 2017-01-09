@@ -3,7 +3,8 @@ package aula;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-public class CriaTabelaEditora {
+public class CriaTabelaLivro {
+
 	public static void main(String[] args) throws Exception {
 
 		// Abre conexao
@@ -11,9 +12,10 @@ public class CriaTabelaEditora {
 		Connection conexao = ConnectionFactory.createConnection();
 
 		// Cria string sql
-		System.out.println("Criando a tabela Editora...");
-		String sql = "CREATE TABLE Editora (" + "id BIGINT NOT NULL AUTO_INCREMENT," + "nome VARCHAR (255) NOT NULL,"
-				+ "email VARCHAR (255) NOT NULL," + "PRIMARY KEY (id)" + ")" + "ENGINE = InnoDB";
+		System.out.println("Criando tabela Livro...");
+		String sql = "CREATE TABLE Livro (" + "id BIGINT NOT NULL AUTO_INCREMENT," + "titulo VARCHAR (225) NOT NULL,"
+				+ "preco DOUBLE NOT NULL," + "editora_id BIGINT NOT NULL," + "PRIMARY KEY (id),"
+				+ "FOREIGN KEY fk_editora (editora_id) REFERENCES Editora (id)" + ")" + "ENGINE = InnoDB";
 
 		// Cria comando
 		PreparedStatement comando = conexao.prepareStatement(sql);
@@ -27,5 +29,7 @@ public class CriaTabelaEditora {
 		// Fecha conexao
 		System.out.println("Fechando conexao...");
 		conexao.close();
+
 	}
+
 }
